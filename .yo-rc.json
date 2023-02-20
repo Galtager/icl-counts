@@ -1,0 +1,14 @@
+{
+  "generator-ui5-ts-app": {
+    "application": "InventoryCount",
+    "namespace": "ICL",
+    "framework": "SAPUI5",
+    "frameworkVersion": "1.108.7",
+    "author": "gal tager",
+    "tstypes": "@sapui5/ts-types-esm",
+    "tstypesVersion": "1.108.7",
+    "appId": "ICL.InventoryCount",
+    "appURI": "ICL/InventoryCount",
+    "setupCompleted": true
+  }
+}
