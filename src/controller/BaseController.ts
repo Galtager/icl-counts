@@ -1,78 +1,63 @@
+import AppComponent from "../Component";
+import JSONModel from "sap/ui/model/json/JSONModel";
+
 import Controller from "sap/ui/core/mvc/Controller";
 import UIComponent from "sap/ui/core/UIComponent";
-import AppComponent from "../Component";
 import Model from "sap/ui/model/Model";
 import ResourceModel from "sap/ui/model/resource/ResourceModel";
 import ResourceBundle from "sap/base/i18n/ResourceBundle";
 import Router from "sap/ui/core/routing/Router";
 import History from "sap/ui/core/routing/History";
+import formatter from "../model/formatter";
+import UI5Event from "sap/ui/base/Event";
+import Fragment from "sap/ui/core/Fragment";
+import UI5Element from "sap/ui/core/Element";
+import View from "sap/ui/core/mvc/View";
+import Popover from "sap/m/Popover";
+import Dialog from "sap/m/Dialog";
+import IconPool from "sap/ui/core/IconPool";
 
 /**
  * @namespace ICL.InventoryCount.controller
  */
 export default abstract class BaseController extends Controller {
+	protected viewController: Controller;
+	private firstRun = true;
 
-	/**
-	 * Convenience method for accessing the component of the controller's view.
-	 * @returns The component of the controller's view
-	 */
+	public formatter = formatter;
+	public fragments: {
+		[key: string]: Popover | Dialog;
+	} = {};
+	onInit() {
+		// run only 
+		if (this.firstRun) {
+			this.firstRun = false;
+
+			const countModel = this.getCountsModel();
+			this.loadFilters(countModel);
+			this.loadIcons();
+		}
+	}
+	private getRouter(): Router {
+		return (myComponent as UIComponent).getRouter();
+	}
 	public getOwnerComponent(): AppComponent {
 		return (super.getOwnerComponent() as AppComponent);
 	}
-
-	/**
-	 * Convenience method to get the components' router instance.
-	 * @returns The router instance
-	 */
-	public getRouter() : Router {
-		return UIComponent.getRouterFor(this);
-	}
-
-	/**
-	 * Convenience method for getting the i18n resource bundle of the component.
-	 * @returns The i18n resource bundle of the component
-	 */
 	public getResourceBundle(): ResourceBundle | Promise<ResourceBundle> {
 		const oModel = this.getOwnerComponent().getModel("i18n") as ResourceModel;
 		return oModel.getResourceBundle();
 	}
-
-	/**
-	 * Convenience method for getting the view model by name in every controller of the application.
-	 * @param [sName] The model name
-	 * @returns The model instance
-	 */
-	public getModel(sName?: string) : Model {
+	public getModel(sName?: string): Model {
 		return this.getView().getModel(sName);
 	}
-
-	/**
-	 * Convenience method for setting the view model in every controller of the application.
-	 * @param oModel The model instance
-	 * @param [sName] The model name
-	 * @returns The current base controller instance
-	 */
-	public setModel(oModel: Model, sName?: string) : BaseController {
+	public setModel(oModel: Model, sName?: string): BaseController {
 		this.getView().setModel(oModel, sName);
 		return this;
 	}
-
-	/**
-	 * Convenience method for triggering the navigation to a specific target.
-	 * @public
-	 * @param sName Target name
-	 * @param [oParameters] Navigation parameters
-	 * @param [bReplace] Defines if the hash should be replaced (no browser history entry) or set (browser history entry)
-	 */
-	public navTo(sName: string, oParameters?: object, bReplace?: boolean) : void {
+	public navTo(sName: string, oParameters?: object, bReplace?: boolean): void {
 		this.getRouter().navTo(sName, oParameters, undefined, bReplace);
 	}
-
-	/**
-	 * Convenience event handler for navigating back.
-	 * It there is a history entry we go one step back in the browser history
-	 * If not, it will replace the current entry of the browser history with the main route.
-	 */
 	public onNavBack(): void {
 		const sPreviousHash = History.getInstance().getPreviousHash();
 		if (sPreviousHash !== undefined) {
@@ -80,6 +65,71 @@ export default abstract class BaseController extends Controller {
 		} else {
 			this.getRouter().navTo("main", {}, undefined, true);
 		}
+	}
+	private getMainView(): View {
+		return this.getView() || this.viewController.getView();
+	}
+
+	public cancelFragment(oEvent: UI5Event, fragmentName: string) {
+		const id = this.getMainView().getId() + '--' + fragmentName;
+		this.fragments[id].close();
+	}
+	public async onFragmentHandler(oEvent: UI5Event, fragmentName: string, isDialog?: boolean): Promise<void> {
+		const id = this.getMainView().getId() + '--' + fragmentName;
+		if (!!this.fragments[id] && !isDialog && this.fragments[id].isOpen()) {
+			this.cancelFragment(oEvent, fragmentName);
+		}
+		else {
+			const oButton = oEvent?.getSource() as UI5Element;
+			if (!this.fragments[id]) {
+				const fragment = await Fragment.load({ name: "com.myorg.NewApp.view.fragment." + fragmentName, controller: this });
+				this.fragments[id] = fragment as Dialog
+				this.getView().addDependent(this.fragments[id] as UI5Element);
+			}
+			isDialog ? (this.fragments[id] as Dialog).open() : (this.fragments[id] as Popover).openBy(oButton, true);
+		}
+	}
+	public deleteRowFromList<T>(aList: T[], deleteRow: T) { //generic function for all lists
+		for (let i = 0; i < aList.length; i++) {
+			if (aList[i] == deleteRow) {
+				aList.splice(i, 1);
+				break;
+			}
+		}
+		myComponent.getModel("LocalModel").refresh();
+	}
+	private loadIcons() {
+		const aFonts = [
+			{
+				fontFamily: "SAP-icons-TNT",
+				fontURI: sap.ui.require.toUrl("sap/tnt/themes/base/fonts/")
+			},
+			{
+				fontFamily: "BusinessSuiteInAppSymbols",
+				fontURI: sap.ui.require.toUrl("sap/ushell/themes/base/fonts/")
+			}
+		];
+
+		aFonts.forEach(oFont => {
+			IconPool.registerFont(oFont);
+		});
+
+	}
+	public getCountsModel() {
+		const CountsModel = myComponent.getModel("CountsModel") as JSONModel;
+		return CountsModel;
+	}
+	private loadFilters(countModel: JSONModel) {
+		void fetch("/mockData/CountsFilter.JSON")
+			.then(res => res.json())
+			.then(data => countModel.setProperty('/oData/CountsFilter', data))
+	}
+	public toggleInfo(oEvent: UI5Event, modelPath: string) {
+		const countModel = this.getCountsModel();
+		countModel.setProperty(modelPath, !countModel.getProperty(modelPath));
+	}
+	public navToCount(oEvent: UI5Event, id: string) {
+		myComponent.getRouter().navTo("singleCount", { id });
 	}
 
 }

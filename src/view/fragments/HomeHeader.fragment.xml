@@ -1,0 +1,35 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+	<Toolbar
+		height="3.5rem"
+		class="header"
+	>
+		<content>
+			<c:Icon
+				visible="{CountsModel>/oFlags/headerNavBack}"
+				press="onNavBack"
+				class="sapUiSmallMargin"
+				src="sap-icon://nav-back"
+				size="1.4rem"
+			/>
+			<Image
+				src="./images/ICL_NEW_LOGO_TRANSPARENT.png"
+				press="navTo('main')"
+				height="30px"
+				width="60px"
+			/>
+			<ToolbarSpacer/>
+			<Text
+				text="{CountsModel>/oMaintain/title}"
+				class="label"
+			/>
+			<ToolbarSpacer/>
+			<Button
+				icon="sap-icon://person-placeholder"
+				class="sapUiTinyMarginBegin avatarBtn"
+			/>
+		</content>
+	</Toolbar>
+</c:FragmentDefinition>

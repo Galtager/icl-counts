@@ -1,0 +1,219 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.SingleCount"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+	xmlns:c="sap.ui.core"
+>
+	<Page id="singleCount">
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<VBox class="container">
+				<!-- count number section -->
+				<HBox
+					width="100%"
+					justifyContent="SpaceBetween"
+				>
+					<Label
+						textDirection="RTL"
+						class="small-label bolder-text sapUiSmallMarginBottom"
+						text="{CountsModel>subTitle}"
+						wrapping="true"
+					/>
+					<Button
+						class="menu_collapse_btn normalBtn margin-lr-25"
+						iconFirst="false"
+						icon="{= !!${CountsModel>/collapse}?'sap-icon://slim-arrow-up':'sap-icon://slim-arrow-down'}"
+						press="toggleInfo"
+					/>
+				</HBox>
+				<!-- search section -->
+				<HBox
+					width="100%"
+					justifyContent="SpaceBetween"
+					class="sapUiTinyMarginBottom"
+				>
+					<HBox class="flex1">
+						<SearchField
+							maxLength="40"
+							showSearchButton="false"
+							placeholder="{i18n>itemSearch}"
+							class="SearchField1 fontLabelColor"
+						/>
+						<Button
+							class="serchLineIcon  halfCircle"
+							icon="sap-icon://bar-code"
+						/>
+					</HBox>
+					<Button
+						class="serchLineIcon sapUiTinyMarginBegin"
+						icon="sap-icon://customize"
+					/>
+					<Button
+						class="serchLineIcon sapUiTinyMarginBegin"
+						icon="sap-icon://BusinessSuiteInAppSymbols/icon-add-note"
+					/>
+				</HBox>
+				<List
+					id="workOrdersList"
+					class="fontBold pathsList sapUiTinyMarginTop"
+					items="{CountsModel>/workOrders}"
+					growing="true"
+					noDataText="{i18n>noItems}"
+				>
+					<CustomListItem
+						type="Active"
+						class="sapUiTinyMarginBottom"
+					>
+						<VBox class="sapUiSmallMargin">
+							<HBox justifyContent="SpaceBetween">
+								<Label
+									class="label bolder-text line-h-20"
+									text="{CountsModel>code}"
+									wrapping="true"
+								/>
+							</HBox>
+							<Label
+								class="label bolder-text line-h-20"
+								text="{CountsModel>title}"
+								wrapping="true"
+							/>
+							<Label
+								textDirection="RTL"
+								class="small-label bolder-text sapUiSmallMarginBottom"
+								text="{CountsModel>subTitle}"
+								wrapping="true"
+							/>
+							<HBox
+								justifyContent="SpaceBetween"
+								class="sapUiSmallMarginBottom"
+							>
+								<VBox>
+									<HBox>
+										<c:Icon
+											src="sap-icon://map"
+											class="sapUiTinyMarginEnd alingIcon"
+										/>
+										<Label
+											width="8rem"
+											class="small-label sapUiTinyMarginEnd"
+											text="{CountsModel>location}"
+											wrapping="true"
+										/>
+										<Label
+											class="small-label"
+											text="{CountsModel>locationDesc}"
+											wrapping="true"
+										/>
+									</HBox>
+									<HBox>
+										<c:Icon
+											src="sap-icon://BusinessSuiteInAppSymbols/icon-equipment"
+											class="sapUiTinyMarginEnd alingIcon"
+										/>
+										<Label
+											width="8rem"
+											class="small-label sapUiTinyMarginEnd"
+											text="{CountsModel>equipment}"
+											wrapping="true"
+										/>
+										<Label
+											class="small-label"
+											text="{CountsModel>equipmentDesc}"
+											wrapping="true"
+										/>
+									</HBox>
+								</VBox>
+								<Button
+									icon="sap-icon://navigation-right-arrow"
+									class="cyan-btn-fill circleBtn"
+								/>
+							</HBox>
+							<HBox
+								justifyContent="SpaceBetween"
+								alignItems="End"
+							>
+								<VBox>
+									<HBox>
+										<Label
+											width="3rem"
+											class="small-label sapUiTinyMarginEnd"
+											text="{i18n>start}"
+											wrapping="true"
+										/>
+										<Label
+											class="small-label sapUiTinyMarginEnd"
+											text="{CountsModel>startDate}"
+											wrapping="true"
+										/>
+										<Label
+											class="small-label"
+											text="{CountsModel>startTime}"
+											wrapping="true"
+										/>
+									</HBox>
+									<HBox>
+										<Label
+											width="3rem"
+											class="small-label sapUiTinyMarginEnd"
+											text="{i18n>end}"
+											wrapping="true"
+										/>
+										<Label
+											class="small-label sapUiTinyMarginEnd"
+											text="{CountsModel>endDate}"
+											wrapping="true"
+										/>
+										<Label
+											class="small-label"
+											text="{CountsModel>endTime}"
+											wrapping="true"
+										/>
+									</HBox>
+								</VBox>
+								<Button
+									icon="sap-icon://attachment"
+									text="{i18n>attachments} ({CountsModel>attachments})"
+									class="menu_collapse_btn smallBtn"
+								/>
+							</HBox>
+						</VBox>
+					</CustomListItem>
+				</List>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar
+				height="3.5rem"
+				class="footer"
+			>
+				<Button
+					width="8rem"
+					text="{i18n>scan}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					width="6rem"
+					text="{i18n>save}"
+					class="cyan-btn-outline btnHieght2"
+					press="onNavBack"
+				/>
+				<Button
+					width="6rem"
+					text="{i18n>endCount}"
+					class="cyan-btn-outline btnHieght2"
+					press="onNavBack"
+				/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

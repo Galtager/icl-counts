@@ -1,5 +1,11 @@
+declare global {
+	// eslint-disable-next-line no-var
+	var myComponent: Component
+}
 import UIComponent from "sap/ui/core/UIComponent";
 import { support } from "sap/ui/Device";
+import ODataModel from "sap/ui/model/odata/v2/ODataModel";
+import models from "./model/models";
 
 
 /**
@@ -11,13 +17,17 @@ export default class Component extends UIComponent {
 		manifest: "json"
 	};
 
-	private contentDensityClass : string;
+	private contentDensityClass: string;
 
-	public init() : void {
+	public init(): void {
+		globalThis.myComponent = this;
+		this.setModel(models.createJsonModel(), "CountsModel");
+		const oModel = this.getModel('CountsModel')
+		oModel.setSizeLimit(1000);
+
 		// call the base component's init function
 		super.init();
-
-		// create the views based on the url/hash
+		// this.getContentDensityClass()
 		this.getRouter().initialize();
 	}
 
@@ -28,7 +38,7 @@ export default class Component extends UIComponent {
 	 * @public
 	 * @return {string} css class, either 'sapUiSizeCompact' or 'sapUiSizeCozy' - or an empty string if no css class should be set
 	 */
-	public getContentDensityClass() : string {
+	public getContentDensityClass(): string {
 		if (this.contentDensityClass === undefined) {
 			// check whether FLP has already set the content density class; do nothing in this case
 			if (document.body.classList.contains("sapUiSizeCozy") || document.body.classList.contains("sapUiSizeCompact")) {
@@ -41,6 +51,14 @@ export default class Component extends UIComponent {
 			}
 		}
 		return this.contentDensityClass;
+	}
+	public i18n(str: string): string {
+		const i18n = this.getModel("i18n");
+		const translation = i18n.getProperty(str) as string
+		return translation;
+	}
+	public getOdataModel<T extends ODataModel>(sName?: string): T {
+		return <T>super.getModel(sName);
 	}
 
 }
