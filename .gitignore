@@ -1,7 +1,5 @@
 # build results
 webapp
-dist
-
 # Logs
 logs
 *.log

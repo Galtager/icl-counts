@@ -1,0 +1,293 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.SingleCount"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+	xmlns:c="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+>
+	<Page id="singleCount">
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<VBox class="container">
+				<!-- count number section -->
+				<HBox
+					width="100%"
+					justifyContent="SpaceBetween"
+					alignItems="Center"
+				>
+					<FlexBox>
+						<Label
+							textAlign="Center"
+							class="med-label bolder-text sapUiTinyMarginEnd"
+							text="{i18n>countNum}"
+						/>
+						<Label
+							textAlign="Center"
+							class="med-label bolder-text sapUiTinyMarginEnd"
+							text="{CountsModel>/oMaintain/selCount/id}"
+						/>
+						<Label
+							visible="{CountsModel>/oMaintain/selCount/isMichlol}"
+							textAlign="Center"
+							class="med-label bolder-text "
+							text="{i18n>michlol}"
+						/>
+					</FlexBox>
+					<Button
+						class="menu_collapse_btn normalBtn margin-lr-25"
+						iconFirst="false"
+						icon="{= !!${CountsModel>/collapse}?'sap-icon://slim-arrow-up':'sap-icon://slim-arrow-down'}"
+						press="toggleInfo($event,'/collapse')"
+					/>
+				</HBox>
+				<!-- location -->
+				<HBox visible="{= !!${CountsModel>/collapse}}">
+					<Label
+						class="med-label sapUiTinyMarginEnd thin-text"
+						text="{i18n>site}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label sapUiTinyMarginEnd thin-text"
+						text="{CountsModel>/oMaintain/selCount/site}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label sapUiTinyMarginEnd thin-text"
+						text="{i18n>locStorage}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label thin-text"
+						text="{CountsModel>/oMaintain/selCount/locStorage}"
+						wrapping="true"
+					/>
+				</HBox>
+				<!-- dates -->
+				<HBox visible="{= !!${CountsModel>/collapse}}">
+					<Label
+						class="med-label thin-text sapUiTinyMarginEnd"
+						text="{i18n>date}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label thin-text sapUiTinyMarginEnd"
+						text="{CountsModel>/oMaintain/selCount/date}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label thin-text sapUiTinyMarginEnd"
+						text="{i18n>sla}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label thin-text"
+						text="{CountsModel>/oMaintain/selCount/sla}"
+						wrapping="true"
+					/>
+				</HBox>
+				<!-- search section -->
+				<HBox
+					width="100%"
+					justifyContent="SpaceBetween"
+					class="sapUiTinyMarginTopBottom"
+				>
+					<HBox class="flex1">
+						<SearchField
+							id="countSF"
+							maxLength="40"
+							showSearchButton="false"
+							placeholder="{i18n>itemSearch}"
+							class="SearchField1 fontLabelColor circleOnFocus"
+						/>
+						<Button
+							press="onQRScanner"
+							visible="{= !${CountsModel>/oFlags/countSFToggle}}"
+							class="serchLineIcon  halfCircle"
+							icon="sap-icon://bar-code"
+						/>
+					</HBox>
+					<Button
+						visible="{= !${CountsModel>/oFlags/countSFToggle}}"
+						class="serchLineIcon sapUiTinyMarginBegin"
+						icon="sap-icon://customize"
+						press="onFragmentHandler($event,'Dialog_Filters',true)"
+					/>
+				</HBox>
+				<!-- list -->
+				<Label
+					visible="{= !!${CountsModel>/oData/countItems/length}}"
+					textAlign="Center"
+					class="med-label sapUiTinyMarginEnd"
+					text="{CountsModel>/oData/countItems/length} {i18n>items}"
+				/>
+				<List
+					class="fontBold pathsList sapUiTinyMarginTop"
+					items="{CountsModel>/oData/countItems}"
+					growing="true"
+					noDataText="{i18n>noItems}"
+				>
+					<CustomListItem class="sapUiTinyMarginBottom">
+						<customData>
+							<c:CustomData
+								key="approved"
+								value="{= !!${CountsModel>approve}?'true':'false'}"
+								writeToDom="true"
+							/>
+						</customData>
+						<VBox class="sapUiSmallMargin">
+							<HBox
+								justifyContent="SpaceBetween"
+								class="sapUiSmallMarginBottom"
+							>
+								<HBox>
+									<c:Icon
+										visible="{= !!${CountsModel>approve}}"
+										src="sap-icon://accept"
+										class="sapUiTinyMarginEnd vAlingMiddle"
+									/>
+									<Link
+										press="openItemDetails"
+										text="{CountsModel>itemNum}"
+										class="med-label  cyanColor vAlingMiddle sapUiTinyMarginEnd"
+									/>
+									<tnt:InfoLabel
+										visible="{= ${CountsModel>status}==='1'}"
+										text="{CountsModel>statusDesc}"
+										class="infoLabel-status infoLabel-md-padding"
+									/>
+								</HBox>
+								<HBox>
+									<Label
+										vAlign="Middle"
+										text="{CountsModel>storageLoc}"
+										class="small-label sapUiTinyMarginEnd"
+									/>
+									<tnt:InfoLabel
+										text="{CountsModel>amount}"
+										class="infoLabel-status infoLabel-sm-padding"
+									/>
+								</HBox>
+							</HBox>
+							<Label
+								class="label bolder-text line-h-20"
+								text="{CountsModel>desc}"
+								wrapping="true"
+							/>
+							<Label
+								visible="{= ${CountsModel>type}==='2'}"
+								textDirection="RTL"
+								class="label bolder-text line-h-20"
+								text="{CountsModel>supplier}"
+								wrapping="true"
+							/>
+							<Label
+								visible="{= !!${CountsModel>collapse}}"
+								class="small-label"
+								text="{CountsModel>longDesc}"
+								wrapping="true"
+							/>
+							<HBox justifyContent="End">
+								<Button
+									class="menu_collapse_btn normalBtn  margin-0"
+									iconFirst="false"
+									icon="{= !!${CountsModel>collapse}?'sap-icon://slim-arrow-up':'sap-icon://slim-arrow-down'}"
+									press="toggleLongDesc"
+									text="{= !!${CountsModel>collapse}?${i18n>collapse}:${i18n>longDesc}}"
+								/>
+							</HBox>
+							<HBox
+								justifyContent="SpaceBetween"
+								alignItems="End"
+							>
+								<HBox>
+									<Input
+										liveChange="onChangeAmount"
+										placeholder="{i18n>amount}"
+										value="{CountsModel>count}"
+										class="inputClass numberInput sapUiTinyMarginEnd"
+									/>
+									<Button
+										press="choosePersonalNumber"
+										visible="{= !!${CountsModel>isMichlol}&amp;&amp;!!${CountsModel>count}&amp;&amp;!${CountsModel>approve}}"
+										width="5.5rem"
+										text="+ {i18n>personalNum}"
+										class="cyan-btn-fill btnHieght25"
+									/>
+									<Button
+										press="choosePersonalNumber"
+										visible="{= !!${CountsModel>isMichlol}&amp;&amp;!!${CountsModel>count}&amp;&amp;!!${CountsModel>approve}}"
+										width="5.5rem"
+										text="# {i18n>personalsNum}"
+										class="menu_collapse_btn normalBtn alingItem margin-0"
+									/>
+									<Button
+										visible="{= !${CountsModel>isMichlol}&amp;&amp;!!${CountsModel>count}&amp;&amp;!${CountsModel>approve}}"
+										width="5.5rem"
+										press="approveItem"
+										text="{i18n>accept}"
+										class="cyan-btn-fill btnHieght25"
+									/>
+								</HBox>
+								<HBox>
+									<Image
+										src="{
+											parts: ['CountsModel>accessType'],
+											formatter: '.formatter.accessImage'
+										}"
+										height="20px"
+										width="35px"
+									/>
+									<Label
+										class="med-label bold-text vAlingMiddle"
+										text="{
+											parts: ['CountsModel>accessType'],
+											formatter: '.formatter.accessDesc'
+										}"
+										wrapping="true"
+									/>
+								</HBox>
+							</HBox>
+						</VBox>
+					</CustomListItem>
+				</List>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar
+				height="3.5rem"
+				class="footer"
+			>
+				<Button
+					press="openFooterScan"
+					icon="sap-icon://bar-code"
+					width="6.5rem"
+					text="{i18n>scan}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					width="5rem"
+					text="{i18n>save}"
+					class="cyan-btn-outline btnHieght2"
+					press="onEndCountDialog"
+				/>
+				<Button
+					width="6.6rem"
+					text="{i18n>endCount}"
+					class="cyan-btn-outline btnHieght2"
+					press="onEndCountDialog"
+				/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

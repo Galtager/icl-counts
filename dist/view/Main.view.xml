@@ -1,0 +1,186 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+	xmlns:c="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+>
+	<Page id="main">
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<VBox class="container">
+				<!-- search section -->
+				<HBox
+					width="100%"
+					justifyContent="SpaceBetween"
+					class="sapUiTinyMarginBottom"
+				>
+					<HBox class="flex1">
+						<SearchField
+							id="countsListSF"
+							maxLength="40"
+							showSearchButton="false"
+							placeholder="{i18n>countSearch}"
+							class="SearchField1 circleOnFocus fontLabelColor"
+						/>
+						<Button
+							press="onQRScanner"
+							visible="{= !${CountsModel>/oFlags/countsListSFToggle}}"
+							class="serchLineIcon  halfCircle "
+							icon="sap-icon://bar-code"
+						/>
+					</HBox>
+					<Button
+						visible="{= !${CountsModel>/oFlags/countsListSFToggle}}"
+						class="serchLineIcon sapUiTinyMarginBegin"
+						icon="sap-icon://customize"
+						press="onFragmentHandler($event,'Dialog_Filters',true)"
+					/>
+					<Button
+						visible="{= !${CountsModel>/oFlags/countsListSFToggle}}"
+						class="serchLineIcon sapUiTinyMarginBegin"
+						icon="sap-icon://BusinessSuiteInAppSymbols/icon-add-note"
+						press="navTo('createCount')"
+					/>
+				</HBox>
+				<List
+					class="fontBold pathsList sapUiTinyMarginTop"
+					items="{CountsModel>/oData/CountsList}"
+					growing="true"
+					noDataText="{i18n>noCounts}"
+				>
+					<CustomListItem
+						type="Active"
+						class="sapUiTinyMarginBottom"
+						press="onPressCount($event,${CountsModel>})"
+					>
+						<VBox class="sapUiSmallMargin">
+							<!-- title -->
+							<HBox
+								justifyContent="SpaceBetween"
+								class="sapUiTinyMarginBottom"
+								alignItems="Center"
+							>
+								<FlexBox>
+									<Label
+										class="med-label bolder-text  sapUiTinyMarginEnd"
+										text="{CountsModel>id}"
+									/>
+									<Label
+										class="med-label bolder-text line-h-20 "
+										text="{CountsModel>typeDesc}"
+										wrapping="true"
+									/>
+									<Image
+										visible="{= !!${CountsModel>isMichlol}}"
+										src="../images/forklift.png"
+										height="20px"
+										width="35px"
+									/>
+								</FlexBox>
+								<VBox alignItems="Center">
+									<tnt:InfoLabel
+										text="{CountsModel>statusDesc}"
+										class="infoLabel-status"
+									>
+										<tnt:customData>
+											<c:CustomData
+												key="statusColor"
+												value="{CountsModel>status}"
+												writeToDom="true"
+											/>
+										</tnt:customData>
+									</tnt:InfoLabel>
+									<Text
+										visible="{CountsModel>currentWork}"
+										text="{CountsModel>currentWorkName}"
+										class="tiny-label green-text"
+									/>
+								</VBox>
+							</HBox>
+							<!-- site loaciton -->
+							<HBox>
+								<Label
+									class="small-label sapUiTinyMarginEnd"
+									text="{i18n>site}"
+									wrapping="true"
+								/>
+								<Label
+									class="small-label sapUiTinyMarginEnd"
+									text="{CountsModel>site}"
+									wrapping="true"
+								/>
+								<Label
+									class="small-label sapUiTinyMarginEnd"
+									text="{i18n>locStorage}"
+									wrapping="true"
+								/>
+								<Label
+									class="small-label"
+									text="{CountsModel>locStorage}"
+									wrapping="true"
+								/>
+							</HBox>
+							<!-- itur -->
+							<HBox>
+								<Label
+									class="small-label sapUiTinyMarginEnd bold-text"
+									text="{CountsModel>endLoc}"
+									wrapping="true"
+								/>
+								<Label
+									class="small-label sapUiTinyMarginEnd bold-text"
+									text="-"
+									wrapping="true"
+								/>
+								<Label
+									class="small-label sapUiTinyMarginEnd bold-text"
+									text="{CountsModel>endLoc}"
+									wrapping="true"
+								/>
+							</HBox>
+							<!-- dates -->
+							<HBox justifyContent="SpaceBetween">
+								<HBox alignItems="End">
+									<Label
+										class="small-label sapUiTinyMarginEnd"
+										text="{i18n>date}"
+										wrapping="true"
+									/>
+									<Label
+										class="small-label sapUiTinyMarginEnd"
+										text="{CountsModel>date}"
+										wrapping="true"
+									/>
+									<Label
+										class="small-label sapUiTinyMarginEnd"
+										text="{i18n>sla}"
+										wrapping="true"
+									/>
+									<Label
+										class="small-label"
+										text="{CountsModel>sla}"
+										wrapping="true"
+									/>
+								</HBox>
+								<Button
+									icon="sap-icon://navigation-right-arrow"
+									class="cyan-btn-fill circleBtn"
+									press="onPressCount($event,${CountsModel>})"
+								/>
+							</HBox>
+						</VBox>
+					</CustomListItem>
+				</List>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

@@ -1,0 +1,115 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+>
+	<VBox class="container">
+		<!-- count number section -->
+		<HBox
+			visible="{= !${CountsModel>/oFlags/iturSearch}}"
+			width="100%"
+			justifyContent="SpaceBetween"
+			alignItems="Center"
+		>
+			<HBox class="flex1 sapUiTinyMarginBottom">
+				<SearchField
+					maxLength="40"
+					showSearchButton="false"
+					placeholder="{i18n>catalogNumSearch}"
+					class="SearchField1 fontLabelColor"
+				/>
+				<Button
+					press="onQRScanner"
+					class="serchLineIcon  halfCircle "
+					icon="sap-icon://bar-code"
+				/>
+			</HBox>
+		</HBox>
+		<HBox class="sapUiSmallMarginBottom">
+			<HBox class="likeSegment">
+				<SearchField
+					id="fromSF"
+					maxLength="40"
+					showSearchButton="false"
+					value="{CountsModel>/oMaintain/createCount/fromSF}"
+					placeholder="{i18n>fromItur}"
+					class="SearchField1 fontLabelColor "
+				/>
+				<Button
+					press="onQRScanner"
+					class="serchLineIcon  halfCircle "
+					icon="sap-icon://bar-code"
+				/>
+			</HBox>
+			<HBox class="likeSegment">
+				<SearchField
+					value="{CountsModel>/oMaintain/createCount/toSF}"
+					id="toSF"
+					maxLength="40"
+					showSearchButton="false"
+					placeholder="{i18n>toItur}"
+					class="SearchField1 fontLabelColor"
+				/>
+				<Button
+					press="onQRScanner"
+					class="serchLineIcon  halfCircle "
+					icon="sap-icon://bar-code"
+				/>
+			</HBox>
+		</HBox>
+		<List
+			id="itemsToAdd"
+			visible="{= !${CountsModel>/oFlags/iturSearch}}"
+			items="{CountsModel>/oData/itemsToAdd}"
+			class="fontBold pathsList sapUiTinyMarginTop"
+			growing="true"
+			noDataText="{i18n>noItems}"
+		>
+			<CustomListItem class="sapUiTinyMarginBottom">
+				<VBox class="sapUiSmallMargin">
+					<HBox
+						justifyContent="SpaceBetween"
+						class="sapUiTinyMarginBottom"
+					>
+						<CheckBox
+							class="myCheckBox"
+							selected="{CountsModel>selected}"
+							select="checkSelected"
+						/>
+						<HBox>
+							<Label
+								vAlign="Middle"
+								text="{CountsModel>storageLoc}"
+								class="med-label sapUiTinyMarginEnd"
+							/>
+							<tnt:InfoLabel
+								text="{CountsModel>amount}"
+								class="infoLabel-status infoLabel-sm-padding"
+							/>
+						</HBox>
+					</HBox>
+					<Text
+						text="{CountsModel>itemNum}"
+						class=" small-label  line-h-20"
+					/>
+					<Label
+						class="med-label  line-h-20 fontBold700"
+						text="{CountsModel>desc}"
+						wrapping="true"
+					/>
+				</VBox>
+			</CustomListItem>
+		</List>
+		<List
+			visible="{= !!${CountsModel>/oFlags/iturSearch}}"
+			items="{CountsModel>/oData/locations}"
+			class="locationsList"
+		>
+			<StandardListItem
+				type="Active"
+				press="selectLocation"
+				title="{CountsModel>key}"
+			/>
+		</List>
+	</VBox>
+</c:FragmentDefinition>

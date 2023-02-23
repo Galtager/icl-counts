@@ -1,0 +1,122 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.CreateCount"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+	<Page>
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<IconTabBar
+				visible="{= ${CountsModel>/oMaintain/createCount/currStep}==='1'}"
+				selectedKey="{CountsModel>/oMaintain/createCount/tabKey}"
+				class="orderDet-Tabs sapUiTinyMarginTop"
+			>
+				<items>
+					<IconTabFilter
+						text="{i18n>searchItem}"
+						key="1"
+					>
+						<c:Fragment
+							class="sapUiTinyMarginTop"
+							fragmentName="ICL.InventoryCount.view.fragments.Tab_SearchItem"
+							type="XML"
+						/>
+					</IconTabFilter>
+					<IconTabFilter
+						text="{i18n>createCount_items_list} ({CountsModel>/oMaintain/createCount/newItems/length})"
+						key="2"
+					>
+						<c:Fragment
+							class="sapUiTinyMarginTop"
+							fragmentName="ICL.InventoryCount.view.fragments.Tab_NewCountList"
+							type="XML"
+						/>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+			<c:Fragment
+				class="sapUiTinyMarginTop"
+				fragmentName="ICL.InventoryCount.view.fragments.step2_CreateCount"
+				type="XML"
+			/>
+		</content>
+		<footer>
+			<Toolbar
+				height="3.5rem"
+				class="footer"
+			>
+				<Button
+					visible="{= ${CountsModel>/oMaintain/createCount/tabKey}==='1'&amp;&amp;!${CountsModel>/oFlags/iturSearch}&amp;&amp;${CountsModel>/oMaintain/createCount/currStep}==='1'}"
+					icon="sap-icon://bar-code"
+					width="6.5rem"
+					text="{i18n>scan}"
+					class="cyan-btn-fill btnHieght25"
+					press="onQRScanner"
+				/>
+				<Button
+					visible="{= ${CountsModel>/oMaintain/createCount/tabKey}==='2'&amp;&amp;!${CountsModel>/oFlags/iturSearch}&amp;&amp;${CountsModel>/oMaintain/createCount/currStep}==='1'}"
+					width="6.5rem"
+					text="{i18n>remove}"
+					press="removeFromList"
+					class="cyan-btn-outline btnHieght2"
+					enabled="{= !!${CountsModel>/oFlags/itemsToDelete}}"
+				/>
+				<Button
+					width="6rem"
+					text="{i18n>back}"
+					class="cyan-btn-outline btnHieght2"
+					visible="{= !!${CountsModel>/oFlags/iturSearch}}"
+					press="returnFromLocateSeacrh"
+				/>
+				<Button
+					visible="{= ${CountsModel>/oMaintain/createCount/currStep}==='2'}"
+					width="9rem"
+					text="{i18n>toList}"
+					press="onNavBack"
+					class="cyan-btn-outline btnHieght2"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					enabled="{= !!${CountsModel>/oFlags/itemsToAddSelected}}"
+					visible="{= ${CountsModel>/oMaintain/createCount/tabKey}==='1'&amp;&amp;!${CountsModel>/oFlags/iturSearch}&amp;&amp;${CountsModel>/oMaintain/createCount/currStep}==='1'}"
+					width="5rem"
+					text="{i18n>add}"
+					class="cyan-btn-outline btnHieght2"
+					press="addToList"
+				/>
+				<Button
+					visible="{= ${CountsModel>/oMaintain/createCount/currStep}==='2'}"
+					width="9rem"
+					text="{i18n>startCountTitle2}"
+					press="onStartCount"
+					class="cyan-btn-fill btnHieght25"
+				/>
+				<Button
+					enabled="{= !!${CountsModel>/oMaintain/createCount/newItems/length}}"
+					visible="{= ${CountsModel>/oMaintain/createCount/tabKey}==='2'&amp;&amp;!${CountsModel>/oFlags/iturSearch}&amp;&amp;${CountsModel>/oMaintain/createCount/currStep}==='1'}"
+					width="12rem"
+					text="{i18n>addCount}"
+					press="onCreateCount"
+					class="cyan-btn-fill btnHieght25"
+				/>
+				<Button
+					visible="{= !!${CountsModel>/oFlags/iturSearch}}"
+					width="6rem"
+					press="acceptLocate"
+					text="{i18n>accept}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

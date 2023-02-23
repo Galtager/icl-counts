@@ -1,0 +1,28 @@
+[
+    {
+        "itemNum": "0/580/186/000",
+        "desc": "מנוע חשמלי 100 כ\"ס 750 סל\"ד K315M-B3",
+        "unit": "יח'",
+        "personalNum": "5",
+        "storageType": "משטח",
+        "storageLoc": "I01/I01",
+        "attachment": {
+            "name": "מנוע 100 כ\"ס",
+            "fileType": "application/pdf",
+            "base64": "somebase64"
+        }
+    },
+    {
+        "itemNum": "0/580/186/210",
+        "desc": "מנוע חשמלי 40 כ\"ס 1500 סל\"ד K203",
+        "unit": "יח'",
+        "personalNum": "5",
+        "storageType": "משטח",
+        "storageLoc": "I01/I01",
+        "attachment": {
+            "name": "מנוע 40 כ\"ס",
+            "fileType": "application/pdf",
+            "base64": "somebase64"
+        }
+    }
+]

@@ -1,0 +1,133 @@
+{
+	"_version": "1.12.0",
+	"sap.app": {
+		"id": "ICL.InventoryCount",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": false,
+		"rootView": {
+			"viewName": "ICL.InventoryCount.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.108.7",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.ui.layout": {},
+				"sap.ui.unified": {},
+				"sap.m": {}
+			}
+		},
+		"handleValidation": true,
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ICL.InventoryCount.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ICL.InventoryCount.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "main",
+					"target": "main"
+				},
+				{
+					"pattern": "count-{id}",
+					"name": "singleCount",
+					"target": "singleCount"
+				},
+				{
+					"pattern": "endCount",
+					"name": "endCount",
+					"target": "endCount"
+				},
+				{
+					"pattern": "endCount/personalDet",
+					"name": "signature",
+					"target": "signature"
+				},
+				{
+					"pattern": "count/personalNumbers",
+					"name": "personalNumbers",
+					"target": "personalNumbers"
+				},
+				{
+					"pattern": "createCount",
+					"name": "createCount",
+					"target": "createCount"
+				}
+			],
+			"targets": {
+				"main": {
+					"viewId": "main",
+					"viewName": "Main",
+					"viewLevel": 1
+				},
+				"singleCount": {
+					"viewId": "singleCount",
+					"viewName": "SingleCount",
+					"viewLevel": 3
+				},
+				"endCount": {
+					"viewId": "endCount",
+					"viewName": "EndCount",
+					"viewLevel": 4
+				},
+				"signature": {
+					"viewId": "signature",
+					"viewName": "Signature",
+					"viewLevel": 2
+				},
+				"personalNumbers": {
+					"viewId": "personalNumbers",
+					"viewName": "PersonalNumbers",
+					"viewLevel": 4
+				},
+				"createCount": {
+					"viewId": "createCount",
+					"viewName": "CreateCount",
+					"viewLevel": 2
+				}
+			}
+		}
+	}
+}

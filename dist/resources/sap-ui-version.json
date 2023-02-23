@@ -1,0 +1,32 @@
+{
+	"name": "ICL.InventoryCount",
+	"version": "1.0.0",
+	"buildTimestamp": "202302230924",
+	"scmRevision": "",
+	"libraries": [
+		{
+			"name": "sap.m",
+			"version": "1.84.0",
+			"buildTimestamp": "202302230924",
+			"scmRevision": ""
+		},
+		{
+			"name": "sap.ui.core",
+			"version": "1.84.0",
+			"buildTimestamp": "202302230924",
+			"scmRevision": ""
+		},
+		{
+			"name": "sap.ui.layout",
+			"version": "1.84.0",
+			"buildTimestamp": "202302230924",
+			"scmRevision": ""
+		},
+		{
+			"name": "sap.ui.unified",
+			"version": "1.84.0",
+			"buildTimestamp": "202302230924",
+			"scmRevision": ""
+		}
+	]
+}

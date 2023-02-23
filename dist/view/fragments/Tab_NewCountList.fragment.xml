@@ -1,0 +1,51 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+>
+	<VBox class="container">
+		<!-- count number section -->
+		<List
+			id="newCountItems"
+			items="{CountsModel>/oMaintain/createCount/newItems}"
+			class="fontBold pathsList sapUiTinyMarginTop"
+			growing="true"
+			noDataText="{i18n>noItems}"
+		>
+			<CustomListItem class="sapUiTinyMarginBottom">
+				<VBox class="sapUiSmallMargin">
+					<HBox
+						justifyContent="SpaceBetween"
+						class="sapUiTinyMarginBottom"
+					>
+						<CheckBox
+							class="myCheckBox"
+							selected="{CountsModel>deleteState}"
+							select="checkDelete"
+						/>
+						<HBox>
+							<Label
+								vAlign="Middle"
+								text="{CountsModel>storageLoc}"
+								class="med-label sapUiTinyMarginEnd"
+							/>
+							<tnt:InfoLabel
+								text="{CountsModel>amount}"
+								class="infoLabel-status infoLabel-sm-padding"
+							/>
+						</HBox>
+					</HBox>
+					<Text
+						text="{CountsModel>itemNum}"
+						class=" small-label  line-h-20"
+					/>
+					<Label
+						class="med-label  line-h-20 fontBold700"
+						text="{CountsModel>desc}"
+						wrapping="true"
+					/>
+				</VBox>
+			</CustomListItem>
+		</List>
+	</VBox>
+</c:FragmentDefinition>

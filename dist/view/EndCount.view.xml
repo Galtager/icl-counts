@@ -1,0 +1,139 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.EndCount"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+	xmlns:tnt="sap.tnt"
+>
+	<Page id="endCount">
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<VBox class="container">
+				<!-- count number section -->
+				<HBox
+					width="100%"
+					justifyContent="SpaceBetween"
+					alignItems="Center"
+				>
+					<VBox>
+						<Label
+							textAlign="Center"
+							class="med-label bolder-text sapUiTinyMarginEnd"
+							text="{i18n>endCountLabel} {CountsModel>/oMaintain/selCount/id}"
+						/>
+						<Label
+							textAlign="Center"
+							class="med-label bolder-text sapUiTinyMarginEnd"
+							text="{i18n>counted} {CountsModel>/oMaintain/countedItems/length} {i18n>items} {i18n>from} {CountsModel>/oData/countItems/length} "
+						/>
+					</VBox>
+					<Button
+						class="menu_collapse_btn normalBtn margin-lr-25"
+						iconFirst="false"
+						text="{i18n>edit}"
+						icon="sap-icon://edit"
+						press="cancelDlt"
+					/>
+				</HBox>
+				<Label
+					wrapping="true"
+					class="small-label"
+					text="{i18n>otherItmes} {CountsModel>/oMaintain/selCount/id} "
+				/>
+				<List
+					items="{CountsModel>/oMaintain/countedItems}"
+					class="fontBold pathsList sapUiTinyMarginTop"
+					growing="true"
+					noDataText="{i18n>noItems}"
+				>
+					<CustomListItem class="sapUiTinyMarginBottom">
+						<VBox class="sapUiSmallMargin">
+							<HBox
+								justifyContent="SpaceBetween"
+								class="sapUiTinyMarginBottom"
+							>
+								<HBox>
+									<CheckBox
+										class="myCheckBox"
+										selected="{CountsModel>deleteState}"
+										visible="{= !!${CountsModel>/oFlags/endCountEdit}}"
+									/>
+									<Text
+										text="{CountsModel>itemNum}"
+										class="med-label  vAlingMiddle"
+									/>
+								</HBox>
+								<HBox>
+									<Label
+										vAlign="Middle"
+										text="{CountsModel>storageLoc}"
+										class="med-label sapUiTinyMarginEnd"
+									/>
+									<tnt:InfoLabel
+										text="{CountsModel>amount}"
+										class="infoLabel-status infoLabel-sm-padding"
+									/>
+								</HBox>
+							</HBox>
+							<Label
+								class="small-label  line-h-20"
+								text="{CountsModel>desc}"
+								wrapping="true"
+							/>
+							<Label
+								class="med-label bolder-text line-h-20"
+								text="{CountsModel>count}"
+								wrapping="true"
+							/>
+						</VBox>
+					</CustomListItem>
+				</List>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar
+				height="3.5rem"
+				class="footer"
+			>
+				<Button
+					visible="{= !${CountsModel>/oFlags/endCountEdit}}"
+					press="onNavBack"
+					width="7rem"
+					text="{i18n>back}"
+					class="cyan-btn-outline btnHieght2"
+				/>
+				<Button
+					visible="{= !!${CountsModel>/oFlags/endCountEdit}}"
+					press="cancelDlt"
+					width="7rem"
+					text="{i18n>cancel}"
+					class="cyan-btn-outline btnHieght2"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					visible="{= !${CountsModel>/oFlags/endCountEdit}}"
+					width="7rem"
+					text="{i18n>accept}"
+					class="cyan-btn-fill btnHieght25"
+					press="acceptCount"
+				/>
+				<Button
+					visible="{= !!${CountsModel>/oFlags/endCountEdit}}"
+					width="7rem"
+					text="{i18n>deleteItem}"
+					class="cyan-btn-fill btnHieght25"
+					press="deleteitems"
+				/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

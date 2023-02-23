@@ -1,0 +1,63 @@
+[
+    {
+        "id": "1234567890",
+        "type": "1",
+        "typeDesc": "מק\"ט רגיל",
+        "status": "1",
+        "statusDesc": "חדש",
+        "site": "11",
+        "locStorage": "14",
+        "startLoc": "I01/I01",
+        "endLoc": "I01/I03",
+        "date": "3.3.2022",
+        "sla": "23.3.2022",
+        "currentWork": false,
+        "currentWorkName": "גל תגר"
+    },
+    {
+        "id": "45678215",
+        "type": "2",
+        "isMichlol": true,
+        "typeDesc": "מכלול",
+        "status": "2",
+        "statusDesc": "בעבודה",
+        "site": "11",
+        "locStorage": "14",
+        "startLoc": "I01/I01",
+        "endLoc": "I01/I03",
+        "date": "3.3.2022",
+        "sla": "23.3.2022",
+        "currentWork": true,
+        "currentWorkName": "גל תגר"
+    },
+    {
+        "id": "123123123",
+        "type": "1",
+        "typeDesc": "מק\"ט רגיל",
+        "status": "1",
+        "statusDesc": "חדש",
+        "site": "11",
+        "locStorage": "14",
+        "startLoc": "I01/I01",
+        "endLoc": "I02/I03",
+        "date": "4.3.2022",
+        "sla": "30.3.2022",
+        "currentWork": false,
+        "currentWorkName": "גל תגר"
+    },
+    {
+        "id": "321321321",
+        "type": "1",
+        "typeDesc": "מק\"ט רגיל",
+        "status": "1",
+        "statusDesc": "חדש",
+        "site": "11",
+        "locStorage": "14",
+        "startLoc": "I01/I02",
+        "endLoc": "I01/I05",
+        "date": "1.3.2022",
+        "sla": "19.3.2022",
+        "currentWork": false,
+        "currentWorkName": "גל תגר"
+    }
+]

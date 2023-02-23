@@ -1,0 +1,112 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:form="sap.ui.layout.form"
+>
+	<Dialog
+		contentWidth="90%"
+		class="borderRadius"
+	>
+		<customHeader>
+			<Toolbar class="dialog-title-bg">
+				<content>
+					<ToolbarSpacer/>
+					<Title
+						text="{i18n>itemDetails}"
+						class="label"
+					/>
+					<ToolbarSpacer/>
+					<c:Icon
+						src="sap-icon://decline"
+						press="cancelFragment($event,'Dialog_itemDetails')"
+					/>
+				</content>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<form:SimpleForm
+				layout="ResponsiveGridLayout"
+				labelSpanS="4"
+				labelSpanM="4"
+				class="detailsForm sapUiTinyMarginTop"
+				adjustLabelSpan="false"
+			>
+				<form:content>
+					<Label
+						text="{i18n>catalogNum}"
+						class="med-label thin-text"
+					/>
+					<Text
+						text="{CountsModel>/oData/itemDetails/itemNum}"
+						class="med-label bolder-text"
+					/>
+					<Label
+						text="{i18n>desc}"
+						class="med-label thin-text"
+					/>
+					<Text
+						text="{CountsModel>/oData/itemDetails/desc}"
+						class="med-label bolder-text lineH"
+					/>
+					<Label
+						text="{i18n>single}"
+						class="med-label thin-text"
+					/>
+					<Text
+						text="{CountsModel>/oData/itemDetails/unit}"
+						class="med-label bolder-text"
+					/>
+					<Label
+						text="{i18n>personalNum}"
+						class="med-label thin-text"
+					/>
+					<Text
+						class="sapUiTinyMarginEnd med-label bolder-text"
+						text="{CountsModel>/oData/itemDetails/personalNum}"
+					/>
+					<Toolbar class="divider-bottom"/>
+					<Label
+						text="{i18n>storage}"
+						class="med-label thin-text"
+					/>
+					<Text
+						text="{CountsModel>/oData/itemDetails/storageType}"
+						class="med-label bolder-text"
+					/>
+					<Label
+						text="{i18n>iturCode}"
+						class="med-label thin-text"
+						textAlign="Center"
+					/>
+					<Text
+						text="{CountsModel>/oData/itemDetails/storageLoc}"
+						class="med-label bolder-text"
+					/>
+					<Toolbar class="divider-bottom "/>
+					<Label
+						text="{i18n>attachment}"
+						class="med-label thin-text sapUiTinyMarginTop"
+					/>
+					<HBox class="sapUiTinyMarginTop">
+						<Link
+							text="{CountsModel>/oData/itemDetails/attachment/name}"
+							press="openAttchment"
+							class="med-label bold-text dark-cyan sapUiSmallMarginEnd letterSpace"
+						/>
+						<c:Icon
+							color="#0098ba"
+							src="{
+								path: 'CountsModel>/oData/itemDetails/attachment/fileType',
+								formatter: '.formatter.getIconForMimeType'
+							}"
+							press="openAttchment"
+							size="1.3rem"
+						/>
+					</HBox>
+				</form:content>
+			</form:SimpleForm>
+		</content>
+		<buttons>
+		</buttons>
+	</Dialog>
+</c:FragmentDefinition>

@@ -1,0 +1,68 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:tnt="sap.tnt"
+>
+	<VBox
+		class="container"
+		visible="{= ${CountsModel>/oMaintain/createCount/currStep}==='2'}"
+	>
+		<!-- count number section -->
+		<VBox
+			width="100%"
+			alignItems="Center"
+		>
+			<Label
+				wrapping="true"
+				class="text fontBold700 sapUiTinyMarginBottom"
+				text="{i18n>countCreated} "
+			/>
+			<Label
+				wrapping="true"
+				class="greyText sapUiTinyMarginBottom"
+				text="{i18n>countNum} {CountsModel>/oData/createdCount/id} "
+			/>
+		</VBox>
+		<List
+			items="{CountsModel>/oMaintain/createCount/newItems}"
+			class="fontBold pathsList sapUiTinyMarginTop"
+			growing="true"
+			noDataText="{i18n>noItems}"
+		>
+			<CustomListItem class="sapUiTinyMarginBottom">
+				<VBox class="sapUiSmallMargin">
+					<HBox
+						justifyContent="SpaceBetween"
+						class="sapUiTinyMarginBottom"
+					>
+						<Link
+							text="{CountsModel>itemNum}"
+							class="med-label  cyanColor vAlingMiddle sapUiTinyMarginEnd"
+						/>
+						<HBox>
+							<Label
+								vAlign="Middle"
+								text="{CountsModel>storageLoc}"
+								class="med-label sapUiTinyMarginEnd"
+							/>
+							<tnt:InfoLabel
+								text="{CountsModel>amount}"
+								class="infoLabel-status infoLabel-sm-padding"
+							/>
+						</HBox>
+					</HBox>
+					<Label
+						class="small-label  line-h-20"
+						text="{CountsModel>desc}"
+						wrapping="true"
+					/>
+					<Label
+						class="med-label bolder-text line-h-20"
+						text="{CountsModel>unit}"
+						wrapping="true"
+					/>
+				</VBox>
+			</CustomListItem>
+		</List>
+	</VBox>
+</c:FragmentDefinition>

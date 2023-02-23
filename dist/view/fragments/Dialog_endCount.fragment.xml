@@ -1,0 +1,62 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+	<Dialog
+		contentHeight="210px"
+		contentWidth="90%"
+		class="borderRadius"
+	>
+		<customHeader>
+			<Toolbar class="dialog-title-bg">
+				<content>
+					<ToolbarSpacer/>
+					<Title
+						text="{i18n>endCount}"
+						class="label"
+					/>
+					<ToolbarSpacer/>
+				</content>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<VBox
+				alignItems="Center"
+				class="paddingTop"
+			>
+				<Text
+					text="{i18n>endCountQuest}"
+					class="label bold-text sapUiSmallMarginBottom"
+				/>
+				<Text
+					text="{i18n>num} {CountsModel>/oMaintain/selCount/id}"
+					class="label greyText sapUiSmallMarginBottom"
+				/>
+				<Text
+					class="label bold-text sapUiSmallMarginBottom"
+					text="{i18n>counted} {CountsModel>/oMaintain/countedItems/length} {i18n>from} {CountsModel>/oData/countItems/length} {i18n>items}"
+				/>
+				<HBox
+					justifyContent="SpaceBetween"
+					width="90%"
+				>
+					<Button
+						width="6rem"
+						text="{i18n>cancel}"
+						class="cyan-btn-outline btnHieght2"
+						press="cancelFragment($event,'Dialog_endCount')"
+					/>
+					<Button
+						enabled="{= !!${CountsModel>/oMaintain/countedItems/length}}"
+						width="6rem"
+						press="onEndCountProccess"
+						text="{i18n>accept}"
+						class="cyan-btn-fill btnHieght25"
+					/>
+				</HBox>
+			</VBox>
+		</content>
+		<buttons>
+		</buttons>
+	</Dialog>
+</c:FragmentDefinition>

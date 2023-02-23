@@ -1,0 +1,62 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+>
+	<Dialog
+		contentHeight="180px"
+		contentWidth="90%"
+		class="borderRadius"
+	>
+		<customHeader>
+			<Toolbar class="dialog-title-bg">
+				<content>
+					<ToolbarSpacer/>
+					<Title
+						text="{i18n>unsave}"
+						class="label"
+					/>
+					<ToolbarSpacer/>
+				</content>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<VBox
+				height="100%"
+				alignItems="Center"
+				justifyContent="SpaceBetween"
+				class="paddingTop "
+			>
+				<VBox alignItems="Center">
+					<Text
+						text="{i18n>unsaveText}"
+						class="label bold-text "
+					/>
+					<Text
+						class="label bold-text "
+						text="{i18n>unsaveText2}"
+					/>
+				</VBox>
+				<HBox
+					class="sapUiSmallMarginBottom"
+					justifyContent="SpaceBetween"
+					width="90%"
+				>
+					<Button
+						width="7.5rem"
+						text="{i18n>cancel}"
+						class="cyan-btn-outline btnHieght2"
+						press="cancelFragment($event,'Dialog_NavBack')"
+					/>
+					<Button
+						width="7.5rem"
+						press="goBackHome"
+						text="{i18n>continue}"
+						class="cyan-btn-fill btnHieght25"
+					/>
+				</HBox>
+			</VBox>
+		</content>
+		<buttons>
+		</buttons>
+	</Dialog>
+</c:FragmentDefinition>
