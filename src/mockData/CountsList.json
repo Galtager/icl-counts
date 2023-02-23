@@ -12,7 +12,7 @@
         "date": "3.3.2022",
         "sla": "23.3.2022",
         "currentWork": false,
-        "currentWorkName": "לידור משיח"
+        "currentWorkName": "גל תגר"
     },
     {
         "id": "45678215",
@@ -28,7 +28,7 @@
         "date": "3.3.2022",
         "sla": "23.3.2022",
         "currentWork": true,
-        "currentWorkName": "לידור משיח"
+        "currentWorkName": "גל תגר"
     },
     {
         "id": "123123123",
@@ -43,7 +43,7 @@
         "date": "4.3.2022",
         "sla": "30.3.2022",
         "currentWork": false,
-        "currentWorkName": "לידור משיח"
+        "currentWorkName": "גל תגר"
     },
     {
         "id": "321321321",
@@ -58,6 +58,6 @@
         "date": "1.3.2022",
         "sla": "19.3.2022",
         "currentWork": false,
-        "currentWorkName": "לידור משיח"
+        "currentWorkName": "גל תגר"
     }
 ]

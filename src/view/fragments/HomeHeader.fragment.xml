@@ -9,7 +9,7 @@
 		<content>
 			<c:Icon
 				visible="{CountsModel>/oFlags/headerNavBack}"
-				press="onNavBack"
+				press="myNavBack"
 				class="sapUiSmallMargin"
 				src="sap-icon://nav-back"
 				size="1.4rem"

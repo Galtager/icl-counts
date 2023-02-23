@@ -1,0 +1,82 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.PersonalNumbers"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+>
+	<Page id="personalNumber">
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<VBox
+				class="container"
+				visible="{= ${ActivityModel>/step}==='2'}"
+			>
+				<VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom">
+					<Text
+						text="{i18n>countNum} {CountsModel>/oMaintain/selCount/id}"
+						class="med-label lineH27 sapUiSmallMarginBottom"
+					/>
+					<Title
+						text="{i18n>personalNumbersLabel}"
+						class="fontBold700 label"
+					/>
+					<Text
+						text="{CountsModel>/oMaintain/tempSelectedItem/itemNum}"
+						class="small-label thin-text"
+					/>
+					<Text
+						text="{CountsModel>/oMaintain/tempSelectedItem/itemNum}"
+						class="small-label thin-text sapUiSmallMarginBottom"
+					/>
+					<Title
+						text="{CountsModel>/oMaintain/tempSelectedItem/personalNums/length} {i18n>items}"
+						class="fontBold700 label"
+					/>
+					<List
+						items="{CountsModel>/oMaintain/tempSelectedItem/personalNums}"
+						class="transparent-bg"
+						showNoData="false"
+					>
+						<CustomListItem>
+							<Input
+								value="{CountsModel>}"
+								liveChange="changeNumber"
+								placeholder="{i18n>personalNumberPH}"
+								class="inputClass personalNumInput sapUiSmallMarginBottom"
+							/>
+						</CustomListItem>
+					</List>
+				</VBox>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar
+				height="3.5rem"
+				class="footer"
+			>
+				<Button
+					press="onNavBack"
+					width="7rem"
+					text="{i18n>cancel}"
+					class="cyan-btn-outline btnHieght2"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					width="7rem"
+					press="savePersonalNumbers"
+					text="{i18n>save}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

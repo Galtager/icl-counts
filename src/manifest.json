@@ -20,6 +20,7 @@
 		}
 	},
 	"sap.ui5": {
+		"flexEnabled": false,
 		"rootView": {
 			"viewName": "ICL.InventoryCount.view.App",
 			"type": "XML",
@@ -73,6 +74,26 @@
 					"pattern": "count-{id}",
 					"name": "singleCount",
 					"target": "singleCount"
+				},
+				{
+					"pattern": "endCount",
+					"name": "endCount",
+					"target": "endCount"
+				},
+				{
+					"pattern": "endCount/personalDet",
+					"name": "signature",
+					"target": "signature"
+				},
+				{
+					"pattern": "count/personalNumbers",
+					"name": "personalNumbers",
+					"target": "personalNumbers"
+				},
+				{
+					"pattern": "createCount",
+					"name": "createCount",
+					"target": "createCount"
 				}
 			],
 			"targets": {
@@ -84,6 +105,26 @@
 				"singleCount": {
 					"viewId": "singleCount",
 					"viewName": "SingleCount",
+					"viewLevel": 3
+				},
+				"endCount": {
+					"viewId": "endCount",
+					"viewName": "EndCount",
+					"viewLevel": 4
+				},
+				"signature": {
+					"viewId": "signature",
+					"viewName": "Signature",
+					"viewLevel": 2
+				},
+				"personalNumbers": {
+					"viewId": "personalNumbers",
+					"viewName": "PersonalNumbers",
+					"viewLevel": 4
+				},
+				"createCount": {
+					"viewId": "createCount",
+					"viewName": "CreateCount",
 					"viewLevel": 2
 				}
 			}

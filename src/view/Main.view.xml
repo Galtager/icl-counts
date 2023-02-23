@@ -25,31 +25,37 @@
 				>
 					<HBox class="flex1">
 						<SearchField
+							id="countsListSF"
 							maxLength="40"
 							showSearchButton="false"
-							placeholder="{i18n>itemSearch}"
-							class="SearchField1 fontLabelColor"
+							placeholder="{i18n>countSearch}"
+							class="SearchField1 circleOnFocus fontLabelColor"
 						/>
 						<Button
+							press="onQRScanner"
+							visible="{= !${CountsModel>/oFlags/countsListSFToggle}}"
 							class="serchLineIcon  halfCircle "
 							icon="sap-icon://bar-code"
 						/>
 					</HBox>
 					<Button
+						visible="{= !${CountsModel>/oFlags/countsListSFToggle}}"
 						class="serchLineIcon sapUiTinyMarginBegin"
 						icon="sap-icon://customize"
+						press="onFragmentHandler($event,'Dialog_Filters',true)"
 					/>
 					<Button
+						visible="{= !${CountsModel>/oFlags/countsListSFToggle}}"
 						class="serchLineIcon sapUiTinyMarginBegin"
 						icon="sap-icon://BusinessSuiteInAppSymbols/icon-add-note"
+						press="navTo('createCount')"
 					/>
 				</HBox>
 				<List
-					id="workOrdersList"
 					class="fontBold pathsList sapUiTinyMarginTop"
 					items="{CountsModel>/oData/CountsList}"
 					growing="true"
-					noDataText="{i18n>noItems}"
+					noDataText="{i18n>noCounts}"
 				>
 					<CustomListItem
 						type="Active"
@@ -65,18 +71,18 @@
 							>
 								<FlexBox>
 									<Label
-										class="label bolder-text line-h-20 sapUiTinyMarginEnd"
+										class="med-label bolder-text  sapUiTinyMarginEnd"
 										text="{CountsModel>id}"
 									/>
 									<Label
-										class="label bolder-text line-h-20 sapUiTinyMarginEnd"
+										class="med-label bolder-text line-h-20 "
 										text="{CountsModel>typeDesc}"
 										wrapping="true"
 									/>
 									<Image
 										visible="{= !!${CountsModel>isMichlol}}"
 										src="../images/forklift.png"
-										height="25px"
+										height="20px"
 										width="35px"
 									/>
 								</FlexBox>
@@ -96,7 +102,7 @@
 									<Text
 										visible="{CountsModel>currentWork}"
 										text="{CountsModel>currentWorkName}"
-										class="small-label thin-text green-text"
+										class="tiny-label green-text"
 									/>
 								</VBox>
 							</HBox>
@@ -143,7 +149,7 @@
 							</HBox>
 							<!-- dates -->
 							<HBox justifyContent="SpaceBetween">
-								<HBox alignItems="Center">
+								<HBox alignItems="End">
 									<Label
 										class="small-label sapUiTinyMarginEnd"
 										text="{i18n>date}"

@@ -1,0 +1,77 @@
+<mvc:View
+	controllerName="ICL.InventoryCount.controller.Signature"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+	xmlns:lab="ICL.InventoryCount.thirdparty.ui5lab.sign"
+>
+	<Page id="signature">
+		<customHeader>
+			<c:Fragment
+				fragmentName="ICL.InventoryCount.view.fragments.HomeHeader"
+				type="XML"
+			/>
+		</customHeader>
+		<content>
+			<VBox class="container">
+				<VBox class="sapUiSmallMarginBeginEnd sapUiSmallMarginBottom">
+					<Title
+						text="ישראל ישראלי"
+						class="med-label lineH27 sapUiSmallMarginBottom"
+					/>
+					<Text
+						text="{i18n>digitalSign}"
+						class="fontBold700 label sapUiTinyMarginBottom"
+					/>
+					<VBox
+						class="signaturePad"
+						id="signaturePad"
+					>
+						<lab:Signature
+							class="signatureBorder"
+							width="99%"
+							penColor="#797979"
+							penSize="1"
+							backgroundColor="white"
+						/>
+						<HBox
+							justifyContent="End"
+							visible="{= !!${CountsModel>/oMaintain/signature}}"
+						>
+							<Button
+								class="menu_collapse_btn normalBtn margin-lr-25"
+								text="{i18n>clean}"
+								press="cleanSign"
+							/>
+						</HBox>
+					</VBox>
+				</VBox>
+			</VBox>
+		</content>
+		<footer>
+			<Toolbar
+				height="3.5rem"
+				class="footer"
+			>
+				<Button
+					press="onNavBack"
+					width="7rem"
+					text="{i18n>back}"
+					class="cyan-btn-outline btnHieght2"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					enabled="{= !!${CountsModel>/oMaintain/signature}}"
+					width="7rem"
+					press="sendCount"
+					text="{i18n>accept}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

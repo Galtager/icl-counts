@@ -16,6 +16,9 @@ import View from "sap/ui/core/mvc/View";
 import Popover from "sap/m/Popover";
 import Dialog from "sap/m/Dialog";
 import IconPool from "sap/ui/core/IconPool";
+import SearchField from "sap/m/SearchField";
+import BarcodeScanner from "sap/ndc/BarcodeScanner";
+import models from "../model/models";
 
 /**
  * @namespace ICL.InventoryCount.controller
@@ -59,12 +62,7 @@ export default abstract class BaseController extends Controller {
 		this.getRouter().navTo(sName, oParameters, undefined, bReplace);
 	}
 	public onNavBack(): void {
-		const sPreviousHash = History.getInstance().getPreviousHash();
-		if (sPreviousHash !== undefined) {
-			window.history.go(-1);
-		} else {
-			this.getRouter().navTo("main", {}, undefined, true);
-		}
+		window.history.go(-1);
 	}
 	private getMainView(): View {
 		return this.getView() || this.viewController.getView();
@@ -82,7 +80,7 @@ export default abstract class BaseController extends Controller {
 		else {
 			const oButton = oEvent?.getSource() as UI5Element;
 			if (!this.fragments[id]) {
-				const fragment = await Fragment.load({ name: "com.myorg.NewApp.view.fragment." + fragmentName, controller: this });
+				const fragment = await Fragment.load({ name: "ICL.InventoryCount.view.fragments." + fragmentName, controller: this });
 				this.fragments[id] = fragment as Dialog
 				this.getView().addDependent(this.fragments[id] as UI5Element);
 			}
@@ -124,12 +122,48 @@ export default abstract class BaseController extends Controller {
 			.then(res => res.json())
 			.then(data => countModel.setProperty('/oData/CountsFilter', data))
 	}
-	public toggleInfo(oEvent: UI5Event, modelPath: string) {
+	public toggleInfo(oEvent: UI5Event | null, modelPath: string) {
 		const countModel = this.getCountsModel();
 		countModel.setProperty(modelPath, !countModel.getProperty(modelPath));
 	}
 	public navToCount(oEvent: UI5Event, id: string) {
 		myComponent.getRouter().navTo("singleCount", { id });
+	}
+	protected searchFieldExpand(searchFieldId: string) {
+		const searchField = this.getView().byId(searchFieldId) as SearchField;
+		searchField.attachBrowserEvent('focusin', () => {
+			this.toggleInfo(null, `/oFlags/${searchFieldId}Toggle`)
+		})
+		searchField.attachBrowserEvent('focusout', () => {
+			this.toggleInfo(null, `/oFlags/${searchFieldId}Toggle`)
+		})
+
+	}
+	protected onQRScanner(oEvent: UI5Event) {
+		const successCallBacl = (data: any) => {
+			console.log(data)
+		}
+		const failCB = (e: any) => {
+			console.log(e)
+		}
+		BarcodeScanner.scan(successCallBacl, failCB, null, myComponent.i18n('barcodescanner'));
+	}
+	protected resetModel() {
+		this.setModel(models.createJsonModel(), "TempModel");
+		const oTempModel = this.getModel("TempModel") as JSONModel;
+		const countModel = this.getCountsModel();
+		countModel.setData(oTempModel);
+	}
+	protected myNavBack(oEvent: UI5Event) {
+		const oRouter = UIComponent.getRouterFor(this);
+		if (oRouter.getRouteInfoByHash(oRouter.getHashChanger().getHash()).name === 'singleCount') {
+			void this.onFragmentHandler(oEvent, 'Dialog_NavBack', true)
+		}
+		else { this.onNavBack() }
+	}
+	private goBackHome() {
+		// this.resetModel();
+		this.navTo('main');
 	}
 
 }

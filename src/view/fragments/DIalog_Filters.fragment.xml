@@ -1,0 +1,75 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Dialog
+		class="grey-bg"
+		verticalScrolling="false"
+		showHeader="false"
+		stretch="true"
+	>
+		<content>
+			<VBox class="container-80 scroll ">
+				<Text
+					text="{i18n>filter}"
+					class="med-label lineH27 fontBold700"
+				/>
+				<Text
+					text="{i18n>catNumType}"
+					class="small-label lineH27"
+				/>
+				<ComboBox
+					class="inputClass darkBlueBorder bluePH  sapUiTinyMarginBottom"
+					width="100%"
+				/>
+				<Text
+					text="{i18n>liftType}"
+					class="small-label lineH27"
+				/>
+				<ComboBox
+					class="inputClass darkBlueBorder bluePH  sapUiTinyMarginBottom"
+					width="100%"
+				/>
+				<Text
+					text="{i18n>count}"
+					class="small-label lineH27"
+				/>
+				<ComboBox
+					class="inputClass darkBlueBorder bluePH  sapUiSmallMarginBottom"
+					width="100%"
+				/>
+				<Text
+					text="{i18n>sort}"
+					class="med-label  lineH27 fontBold700"
+				/>
+				<Text
+					text="{i18n>gatherBy}"
+					class="small-label  lineH27"
+				/>
+				<ComboBox
+					class="inputClass darkBlueBorder bluePH sapUiTinyMarginBottom"
+					width="100%"
+				/>
+			</VBox>
+			<Toolbar
+				height="3.5rem"
+				class="footer bottomPos"
+			>
+				<Button
+					press="cancelFragment($event,'Dialog_Filters')"
+					width="6rem"
+					text="{i18n>back}"
+					class="cyan-btn-outline btnHieght2"
+				/>
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Button
+					width="6rem"
+					press="cancelFragment($event,'Dialog_Filters')"
+					text="{i18n>save}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+			</Toolbar>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

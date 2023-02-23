@@ -4,7 +4,6 @@
 .sapMPageBgStandard {
     background-color: rgba(241, 241, 241, 1);
 }
-
 .sapMPageWithHeader .sapMPageEnableScrolling.sapUiScrollDelegate {
     top: 3.5rem !important;
 }
@@ -68,9 +67,11 @@ div>div.SearchField1 {
 div:has(>.SearchField1) {
     flex: 1 !important;
 }
-.flex1{
-    flex:1
+
+.flex1 {
+    flex: 1
 }
+
 .SearchField1 .sapMSFI::placeholder {
     font-size: 1.1rem;
     color: #999999;
@@ -85,7 +86,36 @@ div:has(>.SearchField1) {
     width: 100%;
     height: 50px;
     position: relative;
-    border-radius: 0 50px 50px  0 ;
+    border-radius: 0 50px 50px 0;
+}
+
+.SearchField1.circleOnFocus.sapMFocus .sapMSFF {
+    border-radius: 50px;
+}
+.likeSegment:first-child .halfCircle .sapMBtnInner{
+    border-radius: 0 !important;
+        border-right: none !important;
+}
+.likeSegment:first-child .SearchField1 .sapMSFF {
+    border-left: none !important;
+}
+.likeSegment:last-child .SearchField1 .sapMSFF {
+    border-radius: 0 !important;
+    border-left: none !important;
+}
+.likeSegment:last-child .halfCircle .sapMBtnInner {
+    border-right: none !important;
+}
+.likeSegment:has( .sapMFocus) .sapMSFF {
+    border-color: #00b5d3 !important;
+    border-width: 2px;
+}
+.likeSegment:has(.sapMFocus) .halfCircle .sapMBtnInner {
+    border-color: #00b5d3 !important;
+    border-width: 2px;
+}
+.likeSegment .sapMSFB{
+    display: none !important;
 }
 
 .SearchField1 {
@@ -113,7 +143,11 @@ div:has(>.SearchField1) {
 }
 
 .fontBold {
-    font-weight: bold ;
+    font-weight: bold;
+}
+
+.fontBold700 {
+    font-weight: 700 !important;
 }
 
 .sapMLabel.bolder-text,
@@ -167,6 +201,10 @@ div:has(>.SearchField1) {
     box-shadow: 0px 3px 4px 0px rgba(0, 40, 70, 0.2), inset 0px 1px 4px 0px rgba(0, 40, 70, 0.1);
 }
 
+.pathsList .sapMLIB[data-approved='true'] {
+    background-color: rgba(221, 238, 229, 0.99) !important;
+}
+
 .pathsList .sapMLIB {
     margin-top: 0 !important;
     box-shadow: 0px 3px 4px 0px rgba(0, 40, 70, 0.2), inset 0px 1px 4px 0px rgba(0, 40, 70, 0.1);
@@ -180,7 +218,7 @@ div:has(>.SearchField1) {
 .text {
     color: #002846;
     font-size: 19px !important;
-    font-weight: 700 !important;
+    font-weight: 500 ;
     line-height: 24px;
 }
 
@@ -194,7 +232,7 @@ div:has(>.SearchField1) {
 .label {
     color: #002846;
     font-size: 1.1rem !important;
-    font-weight: 500 !important;
+    font-weight: 500;
     line-height: 24px;
 }
 
@@ -205,12 +243,14 @@ div:has(>.SearchField1) {
 .med-label {
     color: #002846;
     font-size: 1rem !important;
-    font-weight: 500 !important;
+    line-height: 1rem;
+    font-weight: 500 ;
 }
 
 .small-label {
     color: #002846;
-    font-size: .9rem ;
+    font-size: .9rem;
+    line-height: .9rem;
     font-weight: 500;
 }
 
@@ -227,12 +267,21 @@ div:has(>.SearchField1) {
 .bold-text {
     font-weight: 600 !important;
 }
-.thin-text{
-        font-weight: 300 !important;
+
+.thin-text {
+    font-weight: 400 !important;
 }
-.green-text{
+
+.letterSpace {
+    letter-spacing: 1px;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+.green-text {
     color: #107e3e !important;
 }
+
 .cyan-btn-fill .sapMBtnInner,
 .cyan-btn-fill .sapUiIcon {
     border-radius: 50px;
@@ -241,9 +290,11 @@ div:has(>.SearchField1) {
     background-color: rgba(0, 181, 211, 1) !important;
     font-size: 1rem !important;
 }
+
 .cyan-btn-fill.sapMBtn {
-height: 100% ;
+    height: 100%;
 }
+
 .cyan-btn-outline .sapMBtnInner,
 .cyan-btn-outline .sapUiIcon {
     font-size: 1rem !important;
@@ -255,8 +306,8 @@ height: 100% ;
 }
 
 .circleBtn .sapMBtnInner {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     display: flex;
     align-items: center;
 }
@@ -410,6 +461,10 @@ height: 100% ;
     border-radius: 0.5rem;
 }
 
+.vAlingMiddle {
+    vertical-align: middle;
+}
+
 .textAreaStyle .sapMInputBaseContentWrapper.sapMInputBaseContentWrapperError {
     border-color: #bb0000;
     background-color: rgba(255, 235, 235, 0.99);
@@ -477,11 +532,13 @@ div>.text-range-input {
     align-items: center;
     justify-content: center;
 }
-.halfCircle .sapMBtnInner{
-border-radius: 50px 0 0 50px;
-padding: 0 1rem;
+
+.halfCircle .sapMBtnInner {
+    border-radius: 50px 0 0 50px;
+    padding: 0 1rem;
 }
-.halfCircle .sapMBtnInner .sapMBtnIcon{
+
+.halfCircle .sapMBtnInner .sapMBtnIcon {
     width: 100%;
 }
 
@@ -639,22 +696,40 @@ div:last-child:has(>.tileStyle) {
 
 }
 
+.infoLabel-md-padding.sapTntInfoLabel {
+    min-width: 100% !important;
+    padding: 0 .7rem !important;
+}
+
+.infoLabel-sm-padding.sapTntInfoLabel {
+    min-width: 100% !important;
+    padding: 0 .3rem !important;
+    border-radius: 6px !important;
+}
+
 .infoLabel-status.sapTntInfoLabel {
     background-color: #d9f4f8;
     border-radius: 50px;
     border: none;
-    min-width: 87px;
-    height: 24px;
+    min-width: 70px;
+    height: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.pathsList .sapMLIB[data-approved='true'] .infoLabel-status.sapTntInfoLabel {
+    background-color: white !important;
+}
+
 .infoLabel-status[data-statusColor='2'].sapTntInfoLabel {
 
     background-color: rgba(202, 230, 213, 0.99);
-}                                        											
+}
+
 .infoLabel-status .sapTntInfoLabelText {
     font-size: 14px;
+    font-weight: 500;
 }
 
 .alingIcon {
@@ -676,9 +751,14 @@ div:last-child:has(>.tileStyle) {
     display: flex !important;
 }
 
-.orderDet-Tabs .sapMITBItem {
+.orderDet-Tabs .sapMITBItem:first-child {
     margin: 0 !important;
-    width: 49%;
+    min-width: 35%;
+    padding: 0 !important;
+}
+.orderDet-Tabs .sapMITBItem:nth-child(2) {
+    margin: 0 !important;
+    min-width: 64%;
     padding: 0 !important;
 }
 
@@ -794,13 +874,26 @@ div:last-child:has(>.tileStyle) {
     min-height: 44px;
     max-height: 100% !important;
     padding: 2px;
-    border-radius: 6px;
-    border: 1px solid #002846;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #00b5d3;
     background-color: #ffffff;
     max-width: 100%;
     display: flex;
     align-items: center;
 }
+
+.personalNumInput.inputClass.sapMInputBase,
+.personalNumInput.inputClass .sapMInputBaseContentWrapper {
+    background-color: transparent !important;
+    outline: none;
+}
+
+.personalNumInput.inputClass .sapMInputBaseInner::placeholder {
+    color: #999999;
+    font-weight: 400;
+}
+
 .selectClass {
     min-height: 40px;
     max-height: 100% !important;
@@ -812,8 +905,16 @@ div:last-child:has(>.tileStyle) {
     display: flex;
     align-items: center;
 }
+
 .numberInput.inputClass.sapMInputBase {
     width: 4rem !important;
+    border-color: #00b5d3;
+    background-color: rgba(0, 181, 211, 0.07);
+}
+
+.numberInput.inputClass .sapMInputBaseInner {
+    color: #00b5d3;
+    background-color: transparent;
 }
 
 .numberInput.inputClass .sapMInputBaseInner::placeholder {
@@ -846,6 +947,7 @@ div:last-child:has(>.tileStyle) {
 }
 
 .inputClass .sapMInputBaseContentWrapper {
+    background-color: transparent;
     border: none;
 }
 
@@ -906,4 +1008,83 @@ div:last-child:has(>.tileStyle) {
 
 .margin-0 {
     margin: 0;
+}
+
+.dialog-title-bg {
+    height: 48px !important;
+    background-color: #002846 !important;
+    color: white !important;
+}
+
+.dialog-title-bg .sapMTitle {
+    color: white !important;
+}
+
+.dark-cyan {
+    color: #0098ba !important;
+}
+
+.borderRadius {
+    border-radius: 8px;
+}
+
+.paddingTop {
+    padding-top: 2rem;
+}
+
+.myCheckBox .sapMCbBg {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 3px !important;
+    border: 1px solid #00b5d3 !important;
+    position: relative !important;
+    padding: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    line-height: 24px !important;
+}
+
+.myCheckBox .sapMCbBg::before {
+    color: #00b5d3 !important;
+    font-size: 1rem;
+}
+
+.myCheckBox {
+    height: 24px !important;
+    line-height: 24px !important;
+    padding: 0 !important;
+    padding-left: .5rem !important;
+
+}
+
+.signaturePad svg {
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #00b5d3;
+}
+
+.transparent-bg .sapMLIB {
+    background-color: transparent;
+    border: none !important;
+}
+div:has(>.alingItem){
+    display: flex;
+    align-items: center;
+}
+.sapMDialog.grey-bg>.sapMDialogSection {
+    background-color: #f1f1f1 ;
+}
+.locationsList .sapMLIB {
+    border: none;
+    height: 62px;
+}
+.locationsList .sapMSLITitleOnly {
+    font-size: 18px;
+color: #333333;}
+
+.locationsList .sapMLIB:first-child{
+    border-radius:10px 10px 0 0;
+}
+.locationsList .sapMLIB:last-child {
+    border-radius:  0 0 10px 10px;
 }

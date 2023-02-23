@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+>
+	<Dialog
+		verticalScrolling="false"
+		showHeader="false"
+		stretch="true"
+	>
+		<content>
+			<VBox
+				justifyContent="Center"
+				class="padding-t-3 sapUiLargeMarginTop"
+				alignItems="Center"
+				height="100%"
+			>
+				<Text
+					text="{i18n>countTitle} {i18n>num} {CountsModel>/oMaintain/selCount/id}"
+					class="title sapUiTinyMarginBottom "
+				/>
+				<Text
+					text="{i18n>successEnd}"
+					class="title sapUiTinyMarginBottom"
+				/>
+				<Text
+					text="{i18n>counted} {CountsModel>/oMaintain/countedItems/length} {i18n>from} {CountsModel>/oData/countItems/length} {i18n>items} "
+					class="text"
+				/>
+				<Image
+					class="padding-t-3"
+					src="../images/SuccessMsg.png"
+					width="18rem"
+				/>
+			</VBox>
+			<Toolbar
+				height="3.5rem"
+				class="footer bottomPos"
+			>
+				<ToolbarSpacer/>
+				<Button
+					visible="{= !${WOModel>/showMsg/success}}"
+					width="10rem"
+					press="goBackHome"
+					text="{i18n>toList}"
+					class="cyan-btn-fill btnHieght25"
+				/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</content>
+	</Dialog>
+</core:FragmentDefinition>
