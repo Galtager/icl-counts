@@ -753,13 +753,17 @@ div:last-child:has(>.tileStyle) {
 
 .orderDet-Tabs .sapMITBItem:first-child {
     margin: 0 !important;
-    min-width: 35%;
+    min-width: 30%;
     padding: 0 !important;
 }
 .orderDet-Tabs .sapMITBItem:nth-child(2) {
     margin: 0 !important;
-    min-width: 64%;
+    min-width: 68%;
     padding: 0 !important;
+}
+.orderDet-Tabs .sapMITBItem:nth-child(2) .sapMITBText{
+    justify-content: start;
+    padding-right: 2rem;
 }
 
 .orderDet-Tabs .sapMITBFilterWrapper {
@@ -1087,4 +1091,15 @@ color: #333333;}
 }
 .locationsList .sapMLIB:last-child {
     border-radius:  0 0 10px 10px;
+}
+.bottomPos {
+    background-color: white;
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+}
+
+.darkBlueBorder {
+    border-color: #002846 !important;
+    border-radius: 6px !important;
 }
