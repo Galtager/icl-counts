@@ -1088,3 +1088,14 @@ color: #333333;}
 .locationsList .sapMLIB:last-child {
     border-radius:  0 0 10px 10px;
 }
+.bottomPos {
+    background-color: white;
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+}
+
+.darkBlueBorder {
+    border-color: #002846 !important;
+    border-radius: 6px !important;
+}
